@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap");
+
+@import "tailwindcss";
+
+@font-face {
+    font-family: "Modern Negra";
+    src: url("/fonts/Modern Negra Demo.ttf") format("truetype");
+}
+@theme {
+    --color-yellow: #e7d393;
+    --color-white-100: #efefef;
+    --font-sans: "Mona Sans", sans-serif;
+    --font-modern-negra: "Modern Negra", sans-serif;
+    --font-serif: "DM Serif Text", serif;
+}
+@utility text-gradient {
+    background: linear-gradient(to bottom, #ffffff, #898989);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+html,
+body {
+    width: 100%;
+    background-color: black;
+    color: white;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+.animation-tryout {
+    position: relative;
+}
+.animation-tryout::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    
+    height: 100%;
+  background-image: linear-gradient(to right bottom, #716bd1, #7970d5, #8175d9, #887add, #907fe1, #907ee5, #8f7de8, #8f7cec, #8675f0, #7c6df3, #7166f7, #645ffb);
+    z-index: -2;
+    transition: all 0.3s ease-in-out;
+}
+.animation-tryout:hover::before {
+    width: 100%;
+    color:aliceblue
+}
+#ani-try {
+    position: relative;
+    
+    
+}
+#ani-try:after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-image: linear-gradient(to right bottom, #716bd1, #7970d5, #8175d9, #887add, #907fe1, #907ee5, #8f7de8, #8f7cec, #8675f0, #7c6df3, #7166f7, #645ffb);
+    z-index: 1;
+    transition: all 0.3s ease-in-out;
+}
+#ani-try:hover:after {
+    width: 100%;
+}

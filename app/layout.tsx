@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import NavBar from "./components/NavBar";
-import Hero from "./components/Hero";
+import NavBar from "./Uicomponents/NavBar";
+
 
 
 const geistSans = Geist({
@@ -31,10 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NavBar />
-        <Hero />
-        <section className="h-[100vh]" />
-        <section className="h-[100vh] bg-white" />
-        <section className="h-[100vh] bg-amber-400" />
+        
         {children}
       </body>
     </html>

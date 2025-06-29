@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useGSAP } from '@gsap/react';
@@ -27,7 +28,7 @@ export default function Hero() {
       yPercent: 100,
       duration: 1.8,
       ease: "expo.out",
-      stagger: 0.06,
+      stagger: 0.05,
     });
 
     gsap.from(paragraphSplit.lines, {
@@ -48,26 +49,24 @@ export default function Hero() {
           scrub: true,
         },
       })
-      .to(".right-leaf", { y: 200 }, 0)
-      .to(".left-leaf", { y: -200 }, 0)
-      .to(".arrow", { y: 100 }, 0);
+      
   }, []);
 
   return (
     <>
       <section
         id="hero"
-        className="absolute inset-0 size-full bg-[url('/baggg.png')] bg-cover bg-center pt-32 sm:pt-0"
+        className="absolute inset-0 size-full bg-[url('/bager.png')] bg-cover bg-center pt-32 sm:pt-0"
       >
         <h1
           id="title"
-          className="md:mt-32 mt-40 text-8xl md:text-[10vw] leading-none text-center font-modern-negra"
+          className="md:mt-32 mt-40 text-8xl md:text-[17vw]  leading-none text-center font-modern-negra"
         >
           ASKRA
         </h1>
         <div
           id="content"
-          className="text-center text-2xl md:text-3xl mt-5 md:mt-10 text-gray-200 font-modern-negra"
+          className="text-center text-2xl md:text-[6vh] mt-5 md:mt-10 text-gray-200 font-modern-negra"
         >
           <p>
             Your AI Coding Companion
@@ -102,20 +101,7 @@ export default function Hero() {
             Code Link
           </Link>
         </div>
-        <Image
-          src="/left.png"
-          alt="Leaf"
-          id='left-leaf'
-   width={200} height={200}
-          className="absolute left-0 md:top-20 xl:top-36 2xl:top-52 md:bottom-auto -bottom-20 md:w-fit w-1/3"
-        />
-        <Image
-          src="/right.png"
-          alt="Leaf"
-          width={200} height={200}  
-          id="right-leaf" 
-          className="absolute right-0 md:bottom-0 xl:top-0 2xl:top-12 top-1/2 md:w-fit w-24"
-          />               
+                      
       </section>
     </>
   );

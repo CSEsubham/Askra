@@ -7,6 +7,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import SplitText from "gsap/SplitText";
+import ShortcutIcon from '@mui/icons-material/Shortcut';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -16,16 +17,20 @@ export default function NavBar() {
       scrollTrigger: {
         trigger: '#nav',
         start: 'bottom top',
+        end: 'top top',
+        scrub: true,
       },
     });
 
     navTween.fromTo(
       '#nav',
-      { backgroundColor: 'transparent' },
+      { backgroundColor: 'transparent'},
+     
       {
         backgroundColor: '#00000050',
         backdropFilter: 'blur(10px)',
         duration: 1,
+        
         ease: 'power1.inOut',
       }
     );
@@ -53,6 +58,7 @@ export default function NavBar() {
 
         <div className="flex items-center gap-5">
           <Link href="/login" className="border px-3 py-2 animation-tryout">
+            <ShortcutIcon className="text-white" />
             TryNow
           </Link>
         </div>

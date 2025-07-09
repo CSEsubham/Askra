@@ -12,7 +12,7 @@ gsap.registerPlugin(useGSAP);
 
 // Custom font
 const titleFont = localFont({
-  src: '../fonts/ManufacturingConsent-Regular.ttf',
+  src: '../fonts/Almendra-BoldItalic.ttf',
   variable: '--font-titleLg',
   display: 'swap',
 });

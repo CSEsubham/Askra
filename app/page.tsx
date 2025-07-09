@@ -1,9 +1,10 @@
 import React from 'react'
+import Navbar from './Uicomponents/Navbar'
 
 export default function page() {
   return (
     <div>
-      <h1 className='bg-white text-4xl text-rose-500 flex justify-center items-center h-[100vh] '>hello</h1>
+      <Navbar />
     </div>
   )
 }

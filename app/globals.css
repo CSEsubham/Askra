@@ -1,2 +1,16 @@
 @import "tailwindcss";
 
+#custom-cursor {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  background: url('/images/cursor.svg') no-repeat center;
+  background-size: contain;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  z-index: 50;
+}
+
+body {
+  cursor: none;
+}

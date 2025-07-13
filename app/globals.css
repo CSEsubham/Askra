@@ -11,6 +11,13 @@
   z-index: 50;
 }
 
-body {
-  cursor: none;
+@keyframes wave {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-25px); }
+  100% { transform: translateX(0); }
 }
+
+.animate-wave {
+  animation: wave 8s ease-in-out infinite;
+}
+

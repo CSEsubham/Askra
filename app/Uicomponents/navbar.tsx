@@ -55,9 +55,9 @@ export default function Navbar() {
         {!open && (
           <div
             onClick={() => setOpen(true)}
-            className="rounded-full bg-white/10 border-2 border-black p-2 hover:scale-110 transition-transform cursor-pointer group backdrop-blur-md"
+            className="rounded-full bg-white border-2 border-black p-2 hover:scale-110 transition-transform cursor-pointer group backdrop-blur-md"
           >
-            <RxHamburgerMenu className="text-black group-hover:text-purple-500 w-6 h-6 transition-colors" />
+            <RxHamburgerMenu className="text-black group-hover:text-purple-500 w-6 h-6 transition-colors " />
           </div>
         )}
       </nav>
@@ -67,7 +67,7 @@ export default function Navbar() {
         ref={sidebarRef}
         className={`fixed top-0 right-0 translate-x-full z-[999] h-screen w-screen sm:w-[450px]
         bg-black text-white shadow-2xl px-8 pt-8 pb-10
-        sm:rounded-l-[250px] flex flex-col justify-between
+        sm:rounded-l-[500px] flex flex-col justify-between
         transition-all duration-700 ease-in-out ${titleFont.className}`}
       >
         {/* Close Icon */}
@@ -84,7 +84,7 @@ export default function Navbar() {
             <li key={text} className="relative group">
               <Link
                 href={text === 'Home' ? '/' : `/${text.toLowerCase().replace(' ', '')}`}
-                className="hover:text-purple-400 transition-all"
+                className="hover:text-purple-400 hover:scale-50 transition-all"
               >
                 {text}
               </Link>

@@ -1,206 +1,106 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import DrawSVGPlugin from 'gsap/DrawSVGPlugin';
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
-import Lottie from 'lottie-react';
-import localFont from 'next/font/local';
-import botAnimation from '@/public/lottie/askra-bot.json';
-import sparkles from '@/public/lottie/sparkles.json';
-import loadingAnimation from '@/public/lottie/loading-askra.json';
+import Link from 'next/link';
+import { FaArrowRight, FaGithub } from 'react-icons/fa';
 
-gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
-
-const titleFont = localFont({
-  src: '../fonts/ManufacturingConsent-Regular.ttf',
-  variable: '--font-title-lg',
-  display: 'swap'
-});
-
-const subtitleFont = localFont({
-  src: '../fonts/Almendra-BoldItalic.ttf',
-  variable: '--font-subtitle',
-  display: 'swap'
-});
-
-// Load Three.js stars dynamically (make sure `Stars.tsx` exists in /components)
-const Stars = dynamic(() => import('../components/Stars'), { ssr: false });
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const heroRef = useRef(null);
-  const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const buttonRef = useRef(null);
-  const cursorRef = useRef(null);
-  const svgPathRef = useRef(null);
-  const [subtitle, setSubtitle] = useState('');
-  const [subtitle2, setSubtitle2] = useState('');
-
-  const typingText =
-    'Askra is your AI sidekick for real-time coding help. Ask anything related to code, errors, or ideas—Askra is always ready.Built by Saran, Subham & Kiran @ GVP to help you fix & learn code instantly';
 
   useEffect(() => {
-    import('locomotive-scroll').then(({ default: LocomotiveScroll }) => {
-      const scrollEl = document.querySelector('[data-scroll-container]');
-      if (scrollEl) {
-        const scroll = new LocomotiveScroll({ el: scrollEl, smooth: true });
-        return () => scroll.destroy();
-      }
-    });
-
     const ctx = gsap.context(() => {
-      gsap.from(titleRef.current, {
-        y: 80,
-        opacity: 0,
-        duration: 1.2,
-        ease: 'power4.out'
-      });
-      gsap.from(buttonRef.current, {
+      gsap.from('.hero-title', {
         y: 40,
         opacity: 0,
-        delay: 0.6,
-        duration: 0.8,
-        ease: 'power3.out'
+        duration: 1.2,
+        ease: 'power4.out',
       });
-      gsap.from(svgPathRef.current, {
-        drawSVG: '0%',
-        duration: 2,
-        delay: 1.2,
-        ease: 'power2.out'
+
+      gsap.from('.hero-desc', {
+        y: 20,
+        opacity: 0,
+        delay: 0.3,
+        duration: 1,
+        ease: 'power2.out',
+      });
+
+      gsap.from('.hero-btn', {
+        opacity: 0,
+        scale: 0.95,
+        delay: 0.6,
+        duration: 1,
+        stagger: 0.15,
+        ease: 'elastic.out(1, 0.75)',
+      });
+
+      gsap.from('.hero-img', {
+        y: 60,
+        opacity: 0,
+        delay: 1,
+        duration: 1,
+        ease: 'power3.out',
       });
     }, heroRef);
 
-    // Typing effect
-    let i = 0;
-    const type = () => {
-      if (i < typingText.length) {
-        setSubtitle((prev) => prev + typingText.charAt(i));
-        i++;
-        setTimeout(type, 30);
-      }
-    };
-    type();
-
-    // Custom Cursor
-    const moveCursor = (e: MouseEvent) => {
-      if (cursorRef.current) {
-        gsap.to(cursorRef.current, {
-          x: e.clientX,
-          y: e.clientY,
-          duration: 0.2,
-          ease: 'power3.out'
-        });
-      }
-    };
-
-    document.addEventListener('mousemove', moveCursor);
-    return () => {
-      document.removeEventListener('mousemove', moveCursor);
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section
+    <main
       ref={heroRef}
-      data-scroll-container
-      className="relative h-screen overflow-hidden bg-[#fefefe] text-black font-sans cursor-none"
+      className="relative bg-gradient-to-br from-white via-purple-50 to-purple-100 overflow-hidden"
     >
-      {/* Parallax Stars */}
-     
-
-      {/* Sparkle Background */}
-      <Lottie
-        animationData={sparkles}
-        loop
-        className="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-50"
-      />
-
-      {/* Custom Cursor */}
-      <div
-        ref={cursorRef}
-        className="hidden md:block fixed top-0 left-0 z-[100] w-6 h-6 rounded-full border border-purple-400 pointer-events-none mix-blend-difference"
-      />
-
-      {/* Gradient Background & Glow */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/backpic.svg"
-          alt="background"
-          layout="fill"
-          objectFit="cover"
-          quality={100}
-          className="opacity-10"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-white/80 to-purple-100/30" />
-      </div>
+      {/* Background SVG Glow */}
+      <div className="absolute -top-20 -left-20 w-[600px] h-[600px] bg-purple-300 opacity-30 blur-[200px] z-0 rounded-full" />
 
       {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-start justify-center h-full px-8 md:px-32 space-y-6 max-w-4xl">
-        <div className="relative">
-          <div className="absolute inset-0 z-0 blur-3xl opacity-40 bg-gradient-to-r from-purple-300 via-pink-300 to-purple-300 animate-pulse" />
-          <h1
-            ref={titleRef}
-            className={`relative z-10 text-5xl md:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-700 via-black to-purple-700 drop-shadow-xl ${titleFont.className}`}
-          >
-            Askra
+      <section className="relative z-10 min-h-screen flex flex-col md:flex-row items-center justify-between px-8 py-24">
+        {/* Text Left */}
+        <div className="max-w-xl flex flex-col gap-6">
+          <p className="text-lg text-purple-600">Hi,There!</p>
+          <h1 className="hero-title text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
+            <span className="text-purple-700 drop-shadow-md">ASKRA</span> <br />
+            your AI coding companion.
           </h1>
-        </div>
+          <p className="hero-desc text-lg text-gray-700 max-w-md">
+            Askra helps you solve, debug, and explore code. Powered by AI, trained for developers like you.
+          </p>
 
-        <p
-          className={`text-lg md:text-xl text-purple-900 max-w-2xl leading-relaxed ${subtitleFont.className}`}
-        >
-          {subtitle}
-        </p>
-
-        {/* SVG Path Animation */}
-        <svg viewBox="0 0 400 100" className="w-full max-w-sm absolute -bottom-4 z-[-10] opacity-70">
-          <path
-            ref={svgPathRef}
-            d="M10,80 C40,10 80,10 110,80 S180,150 210,80"
-            stroke="#6B21A8"
-            strokeWidth="2"
-            fill="none"
-          />
-        </svg>
-
-        {/* Contact Us Button */}
-        <div ref={buttonRef} className="relative group inline-block">
-          <button className="px-8 py-3 text-lg font-semibold bg-purple-600 hover:bg-purple-500 text-white rounded-full shadow-xl transform transition-all duration-300 hover:scale-105 cursor-pointer">
-            Contact Us
-          </button>
-          <div className="absolute top-full mt-2 left-0 w-48 bg-white text-black p-3 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-auto transition-opacity duration-300 z-20">
-            <a
-              href="mailto:subham@example.com"
-              className="block hover:text-purple-600 mb-1"
+          <div className="flex gap-4 mt-6 flex-wrap">
+            <Link
+              href="/auth"
+              className=" flex items-center gap-2 px-5 py-3 bg-purple-700 text-white font-medium rounded-full shadow-md hover:bg-purple-800 transition-all duration-300 group"
             >
-              Email
-            </a>
-            <a
-              href="https://www.linkedin.com/in/subham-kumar-8048052a7/"
+              Try Askra
+              <FaArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
+            </Link>
+            <Link
+              href="https://github.com/CSEsubham/Askra"
               target="_blank"
-              className="block hover:text-purple-600"
+              className=" flex items-center gap-2 px-5 py-3 border border-gray-300 text-gray-800 rounded-full hover:bg-gray-100 transition-all duration-300"
             >
-              LinkedIn
-            </a>
+              GitHub
+              <FaGithub />
+            </Link>
           </div>
         </div>
-      </div>
 
-      {/* Lottie Bot Animation */}
-      <div className="absolute bottom-12 right-12 w-[150px] h-[150px]">
-        <Lottie animationData={botAnimation} loop />
-      </div>
-
-      {/* Floating Chat CTA Button */}
-      <div className="fixed bottom-4 left-4 z-50">
-        <button className="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-full shadow-lg animate-bounce transition-transform duration-300 hover:scale-110 cursor-pointer">
-          💬 Chat with Askra
-        </button>
-      </div>
-    </section>
+        {/* Image Right */}
+        <div className="hero-img w-full max-w-md mt-12 md:mt-0">
+          <Image
+            src="/chatbot.svg"
+            alt="Askra Chatbot"
+            width={500}
+            height={500}
+            className="w-full h-auto rounded-3xl shadow-2xl"
+          />
+        </div>
+      </section>
+    </main>
   );
 }

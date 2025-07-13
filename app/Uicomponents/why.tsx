@@ -1,7 +1,7 @@
 'use client';
 import localFont from 'next/font/local';
 const titleFont = localFont({
-      src: '../fonts/Almendra-BoldItalic.ttf',
+      src: '../fonts/ManufacturingConsent-Regular.ttf',
       variable: '--font-titleLg',
       display: 'swap',
     });
@@ -50,11 +50,11 @@ export default function Why() {
         {features.map((feature, idx) => (
           <div
             key={idx}
-            className="bg-fuchsia-100 p-6 rounded-2xl border-pink-300 shadow-md hover:scale-[1.15] perspective-1000 duration-300 hover:bg-purple-400 hover:text-white hover:shadow-2xl"
+            className="bg-fuchsia-100 p-6 rounded-2xl border-pink-300 shadow-md hover:scale-[1.15] duration-200 hover:bg-purple-400 hover:text-white hover:shadow-2xl"
           >
-            <h3 className={`text-xl font-semibold mb-2 transition-colors ${titleFont.className} duration-300`}>
+            <h3 className={`text-xl font-semibold mb-2 transition-colors font-sans duration-300`}>
               {feature.title}
-            </h3><p className={`transition-colors font-bold md:font-extralight text-3xl duration-300 ${descriptionFont.className}`}>{feature.description}</p>
+            </h3><p className={`transition-colors font-bold md:font-light text-3xl duration-300 ${descriptionFont.className}`}>{feature.description}</p>
             
           </div>
         ))}

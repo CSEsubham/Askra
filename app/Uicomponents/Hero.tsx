@@ -91,6 +91,7 @@ export default function Hero() {
       data-scroll-container
       className="relative h-screen overflow-hidden bg-[#fefefe] text-black font-sans cursor-none"
     >
+      
       {/* Sparkle Background */}
       <Lottie
         animationData={sparkles}

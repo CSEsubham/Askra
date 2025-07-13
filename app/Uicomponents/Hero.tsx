@@ -26,7 +26,7 @@ const subtitleFont = localFont({
   display: 'swap'
 });
 
-// Load Three.js stars dynamically (make sure `Stars.tsx` exists in /components)
+// Load Three.js stars dynamically
 const Stars = dynamic(() => import('../components/Stars'), { ssr: false });
 
 export default function Hero() {
@@ -34,10 +34,8 @@ export default function Hero() {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const buttonRef = useRef(null);
-  const cursorRef = useRef(null);
   const svgPathRef = useRef(null);
   const [subtitle, setSubtitle] = useState('');
-  const [subtitle2, setSubtitle2] = useState('');
 
   const typingText =
     'Askra is your AI sidekick for real-time coding help. Ask anything related to code, errors, or ideas—Askra is always ready.Built by Saran, Subham & Kiran @ GVP to help you fix & learn code instantly';
@@ -46,7 +44,7 @@ export default function Hero() {
     import('locomotive-scroll').then(({ default: LocomotiveScroll }) => {
       const scrollEl = document.querySelector('[data-scroll-container]');
       if (scrollEl) {
-        const scroll = new LocomotiveScroll({ el: scrollEl, smooth: true });
+        const scroll = new LocomotiveScroll({ el: scrollEl as HTMLElement, smooth: true });
         return () => scroll.destroy();
       }
     });
@@ -84,23 +82,7 @@ export default function Hero() {
     };
     type();
 
-    // Custom Cursor
-    const moveCursor = (e: MouseEvent) => {
-      if (cursorRef.current) {
-        gsap.to(cursorRef.current, {
-          x: e.clientX,
-          y: e.clientY,
-          duration: 0.2,
-          ease: 'power3.out'
-        });
-      }
-    };
-
-    document.addEventListener('mousemove', moveCursor);
-    return () => {
-      document.removeEventListener('mousemove', moveCursor);
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -109,20 +91,11 @@ export default function Hero() {
       data-scroll-container
       className="relative h-screen overflow-hidden bg-[#fefefe] text-black font-sans cursor-none"
     >
-      {/* Parallax Stars */}
-     
-
       {/* Sparkle Background */}
       <Lottie
         animationData={sparkles}
         loop
         className="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-50"
-      />
-
-      {/* Custom Cursor */}
-      <div
-        ref={cursorRef}
-        className="hidden md:block fixed top-0 left-0 z-[100] w-6 h-6 rounded-full border border-purple-400 pointer-events-none mix-blend-difference"
       />
 
       {/* Gradient Background & Glow */}
@@ -193,13 +166,6 @@ export default function Hero() {
       {/* Lottie Bot Animation */}
       <div className="absolute bottom-12 right-12 w-[150px] h-[150px]">
         <Lottie animationData={botAnimation} loop />
-      </div>
-
-      {/* Floating Chat CTA Button */}
-      <div className="fixed bottom-4 left-4 z-50">
-        <button className="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-full shadow-lg animate-bounce transition-transform duration-300 hover:scale-110 cursor-pointer">
-          💬 Chat with Askra
-        </button>
       </div>
     </section>
   );
